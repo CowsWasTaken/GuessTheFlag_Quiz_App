@@ -118,7 +118,8 @@ tools:context=".QuizQuestionsActivity">
         android:text="BESTÄTIGEN"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:id="@+id/btnSubmit"/>
 
 </LinearLayout>
 

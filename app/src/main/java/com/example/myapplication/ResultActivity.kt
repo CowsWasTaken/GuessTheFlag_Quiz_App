@@ -2,32 +2,31 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_result.*
 
-class MainActivity : AppCompatActivity() {
+class ResultActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        //Mehtode zum verstecker der Statusleiste
+        setContentView(R.layout.activity_result)
         hideStatusBar()
 
-        btnStart.setOnClickListener {
-            if (etName.text.toString().isEmpty()) {
-                Toast.makeText(this, "Bitte gibt deinen Namen ein", Toast.LENGTH_LONG).show()
-            } else {
-                val intent = Intent(this, QuizQuestionsActivity::class.java)
-                intent.putExtra(Constants.USER_NAME, etName.text.toString())
-                startActivity(intent)
-                finish()
-            }
+        val username = intent.getStringExtra(Constants.USER_NAME)
+        val correctAnswers = intent.getIntExtra(Constants.CORRECT_ANSWERS, 0)
+        val totalQuestions = intent.getIntExtra(Constants.TOTAL_QUESTIONS, 10 )
+
+
+        tvName.text = username;
+        tvScore.text = "Du hast $correctAnswers von $totalQuestions richtig beantwortet"
+        btnFinish.setOnClickListener{
+            startActivity(Intent(this, MainActivity::class.java))
         }
     }
+
 
 
     fun hideStatusBar() {
